@@ -11,17 +11,19 @@ const INITIAL_PEOPLE = [
 ];
 
 export function ChooseTeam(): JSX.Element {
-    const [allOptions] = useState<string[]>(INITIAL_PEOPLE);
+    const [allOptions, setAllOptions] = useState<string[]>(INITIAL_PEOPLE);
     const [team, setTeam] = useState<string[]>([]);
 
     function chooseMember(newMember: string) {
         if (!team.includes(newMember)) {
             setTeam([...team, newMember]);
+            setAllOptions(allOptions.filter((opt) => opt !== newMember));
         }
     }
 
     function clearTeam() {
         setTeam([]);
+        setAllOptions([...INITIAL_PEOPLE]);
     }
 
     return (
