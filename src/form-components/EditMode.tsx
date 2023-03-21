@@ -6,19 +6,11 @@ export function EditMode(): JSX.Element {
     const [name, setName] = useState<string>("Your Name");
     const [student, setStudent] = useState<boolean>(true);
     return (
-        <Form.Group controlId="editMode">
-            <Form.Check
-                type="switch"
-                label="Edit Mode"
-                checked={editing}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setEditing(event.target.checked)
-                }
-            />
+        <>
             {editing ? (
-                <>
+                <Form.Group controlId="editMode">
                     <Form.Control
-                        type="textbox"
+                        type="text"
                         value={name}
                         onChange={(
                             event: React.ChangeEvent<HTMLInputElement>
@@ -27,15 +19,24 @@ export function EditMode(): JSX.Element {
                     <Form.Check
                         type="checkbox"
                         label="Student"
+                        id="student"
                         checked={student}
                         onChange={(
                             event: React.ChangeEvent<HTMLInputElement>
                         ) => setStudent(event.target.checked)}
                     />
-                </>
+                </Form.Group>
             ) : (
-                <p>{`${name} is ${student ? "a" : "not a"} student`}</p>
+                <div>{`${name} is ${student ? "a" : "not a"} student`}</div>
             )}
-        </Form.Group>
+            <Form.Check
+                type="switch"
+                label="Edit Mode"
+                checked={editing}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    setEditing(event.target.checked)
+                }
+            />
+        </>
     );
 }
